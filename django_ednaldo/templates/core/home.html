@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container homepage-grid">
+    <a href="#" class="home-card color-verde">
+        <i class="fa-solid fa-robot fa-4x"></i>
+        <h2>Projetos</h2>
+    </a>
+    
+    <a href="#" class="home-card color-vermelho">
+        <i class="fa-solid fa-user-group fa-4x"></i>
+        <h2>Equipes</h2>
+    </a>
+
+    <a href="{% url 'lista_eventos' %}" class="home-card color-azul-petroleo">
+        <i class="fa-solid fa-calendar-days fa-4x"></i>
+        <h2>Eventos</h2>
+    </a>
+
+    <a href="#" class="home-card color-oliva">
+        <i class="fa-solid fa-camera fa-4x"></i>
+        <h2>Mídia</h2>
+    </a>
+</section>
+{% endblock content %}

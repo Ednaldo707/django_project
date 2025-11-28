@@ -1,0 +1,353 @@
+/* static/css/style.css */
+
+/* ---------------------------------------------------- */
+/* 0. Configurações Globais e Variáveis */
+/* ---------------------------------------------------- */
+:root {
+    /* Cores da Paleta LabMarker */
+    --cor-primaria: #16A085;      /* Azul Petróleo (Eventos) */
+    --cor-secundaria: #2ECC71;   /* Verde (Projetos) */
+    --cor-destaque: #E74C3C;     /* Vermelho (Equipes) */
+    --cor-midia: #B8933B;        /* Oliva/Dourado (Mídia) */
+    --cor-fundo: #f4f7f6;        /* Fundo claro suave */
+    --cor-texto: #333;
+    --cor-texto-claro: #fff;
+    --cor-card-fundo: #ffffff;
+    --sombra-suave: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+
+    /* Tipografia */
+    --fonte-principal: 'Poppins', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+/* ---------------------------------------------------- */
+/* 1. Layout Base (Flexbox) */
+/* ---------------------------------------------------- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ---------------------------------------------------- */
+/* 2. Header e Navbar (Flexbox) */
+/* ---------------------------------------------------- */
+.main-header {
+    background-color: var(--cor-card-fundo);
+    box-shadow: var(--sombra-suave);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    text-decoration: none;
+}
+
+.logo i {
+    margin-right: 5px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--cor-texto);
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--cor-primaria);
+}
+
+.menu-toggle {
+    display: none; /* Esconde no desktop */
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--cor-texto);
+}
+
+/* ---------------------------------------------------- */
+/* 3. HOME - Grid Responsivo (Requisito) */
+/* ---------------------------------------------------- */
+.homepage-grid {
+    display: grid;
+    /* Padrão para desktop: 2 colunas */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px;
+    padding-top: 50px;
+}
+
+.home-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-radius: 12px;
+    color: var(--cor-texto-claro);
+    text-decoration: none;
+    box-shadow: var(--sombra-suave);
+    /* Animação de Hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.home-card i {
+    margin-bottom: 15px;
+}
+
+.home-card h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Cores dos Cards da Home */
+.color-verde { background-color: var(--cor-secundaria); }
+.color-vermelho { background-color: var(--cor-destaque); }
+.color-azul-petroleo { background-color: var(--cor-primaria); }
+.color-oliva { background-color: var(--cor-midia); }
+
+/* ---------------------------------------------------- */
+/* 4. EVENTOS - Lista de Cards */
+/* ---------------------------------------------------- */
+
+.card-list-grid {
+    display: grid;
+    /* Layout padrão para desktop: 3 colunas */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+    padding-top: 20px;
+}
+
+.app-card {
+    background-color: var(--cor-card-fundo);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* Garante que o card ocupe 100% da altura do grid, essencial para grids responsivos */
+    height: 100%; 
+    transition: transform 0.2s;
+}
+
+.app-card:hover {
+    transform: translateY(-3px);
+}
+
+.shadow-lg {
+    box-shadow: var(--sombra-suave);
+}
+
+/* Data Box Estilosa (Inspirada na Imagem) */
+.card-date-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px; /* Largura fixa */
+    height: 80px;
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 8px 0 8px 0;
+    font-weight: 600;
+    line-height: 1.1;
+    /* Destaque visual */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+.card-date-day {
+    font-size: 1.8rem;
+}
+
+.card-date-month {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.card-content {
+    padding: 20px;
+    padding-top: 90px; /* Espaço para o Date Box */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    color: var(--cor-primaria);
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.card-status {
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+.status-aberto { background-color: var(--cor-secundaria); color: white; }
+.status-reservado { background-color: var(--cor-destaque); color: white; }
+.status-finalizado { background-color: #95a5a6; color: white; }
+
+.card-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Garante que ocupe o espaço restante */
+}
+
+.card-footer-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.card-footer-info span {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.card-footer-info i {
+    margin-right: 5px;
+}
+
+/* Botões */
+.btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--cor-primaria);
+    color: var(--cor-texto-claro);
+}
+
+.btn-primary:hover {
+    background-color: #1abc9c;
+}
+
+/* Estado Vazio */
+.empty-state {
+    text-align: center;
+    padding: 50px 0;
+    color: #999;
+}
+
+.empty-state i {
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+/* ---------------------------------------------------- */
+/* 5. Footer */
+/* ---------------------------------------------------- */
+.main-footer {
+    background-color: var(--cor-texto);
+    color: #aaa;
+    padding: 15px 0;
+    text-align: center;
+    margin-top: 40px;
+}
+
+
+/* ---------------------------------------------------- */
+/* 6. Responsividade (Mobile-First) */
+/* ---------------------------------------------------- */
+
+/* Mobile (Padrão) */
+/* O layout já é empilhado por padrão */
+
+/* Tablet e Mobile Grande (a partir de 768px) */
+@media (max-width: 991px) {
+    .nav-links {
+        /* Esconde os links no mobile e tablet */
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--cor-card-fundo);
+        position: absolute;
+        top: 60px; /* Abaixo do header */
+        left: 0;
+        box-shadow: var(--sombra-suave);
+        padding: 10px 0;
+        z-index: 10;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 10px 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .menu-toggle {
+        display: block; /* Mostra o botão no mobile/tablet */
+    }
+}
+
+/* Desktop e Telas Maiores (a partir de 768px) */
+@media (min-width: 768px) {
+    /* Home: 2 Colunas */
+    .homepage-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    /* Eventos: 2 Colunas */
+    .card-list-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop Grande (a partir de 1024px) */
+@media (min-width: 1024px) {
+    /* Eventos: 3 Colunas (Requisito) */
+    .card-list-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

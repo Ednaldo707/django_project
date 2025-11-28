@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="container">
+    <h1>{{ titulo }}</h1>
+    
+    {% if eventos %}
+    <div class="card-list-grid">
+        {% for evento in eventos %}
+        <div class="app-card shadow-lg">
+            <div class="card-date-box color-azul-petroleo">
+                <span class="card-date-day">{{ evento.data|date:"d" }}</span>
+                <span class="card-date-month">{{ evento.data|date:"M" }}</span>
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">{{ evento.titulo }}</h3>
+                <p class="card-status status-{{ evento.status|lower }}">{{ evento.get_status_display }}</p>
+                <p class="card-description">{{ evento.descricao|truncatechars:100 }}</p>
+                <div class="card-footer-info">
+                    <span><i class="fa-solid fa-clock"></i> {{ evento.horario|time:"H:i" }}</span>
+                    <a href="{% url 'detalhe_evento' evento.pk %}" class="btn btn-primary">Detalhes</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <i class="fa-solid fa-calendar-check fa-4x"></i>
+        <p>Parece que não há eventos futuros agendados no momento!</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock content %}

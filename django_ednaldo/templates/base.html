@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo|default:"LabMarker" }}</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="navbar container">
+            <a href="{% url 'homepage' %}" class="logo">
+                <i class="fa-solid fa-flask"></i> LabMarker
+            </a>
+            <button class="menu-toggle" aria-label="Abrir Menu Mobile">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="{% url 'homepage' %}">Início</a></li>
+                <li><a href="{% url 'lista_eventos' %}">Eventos</a></li>
+                <li><a href="#">Projetos</a></li>
+                <li><a href="#">Equipes</a></li>
+                <li><a href="#">Mídia</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-wrapper">
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; {% now "Y" %} LabMarker. Desenvolvido com Django e 💙.</p>
+        </div>
+    </footer>
+    
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>
