@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipes - Manager Maker</title>
+    <style>
+        /* Cores baseadas no seu projeto */
+        :root {
+            --cor-fundo: #f4f7f6; /* O cinza claro do fundo */
+            --cor-primaria: #5fb879; /* O verde do seu robô/logo */
+            --cor-dark: #2d3436;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        /* Plano de fundo idêntico ao seu Manager Maker */
+        body { 
+            background-color: var(--cor-fundo); 
+            padding-top: 90px;
+            color: #333;
+        }
+
+        /* BARRA SUPERIOR (HEADER) */
+        .top-navbar {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 70px;
+            background: white; /* Fundo branco como no seu container principal */
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 30px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            z-index: 1000;
+            border-bottom: 3px solid var(--cor-primaria);
+        }
+
+        .top-navbar h1 { 
+            color: var(--cor-dark); 
+            font-size: 20px; 
+            text-transform: lowercase; 
+            font-weight: bold;
+        }
+
+        .btn-voltar {
+            color: white; text-decoration: none; font-weight: bold;
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 15px; border-radius: 8px;
+            background: var(--cor-primaria); /* Verde do Manager Maker */
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .btn-voltar:hover { transform: scale(1.05); opacity: 0.9; }
+
+        /* GRID DE MEMBROS */
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+
+        /* CARDS ESTILO MENU-BUTTON */
+        .profile-card {
+            background: white; border-radius: 15px; padding: 25px;
+            cursor: pointer; transition: all 0.3s ease;
+            border: 1px solid #eee; text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .profile-card:hover { border-color: var(--cor-primaria); transform: translateY(-5px); }
+
+        .avatar {
+            width: 70px; height: 70px; border-radius: 50%;
+            background: var(--cor-primaria); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; font-weight: bold; margin: 0 auto 15px;
+        }
+
+        /* ESTADO EXPANDIDO */
+        .profile-card.active { 
+            grid-column: span 2; 
+            display: flex; 
+            text-align: left; 
+            gap: 25px; 
+            border-left: 5px solid var(--cor-primaria);
+        }
+
+        .profile-card.active .avatar { width: 90px; height: 90px; flex-shrink: 0; margin: 0; }
+
+        .details-grid { display: none; margin-top: 15px; width: 100%; }
+        .profile-card.active .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+        .label { font-size: 10px; color: #999; text-transform: uppercase; font-weight: bold; }
+        .value { font-size: 14px; color: #222; font-weight: 600; display: block; margin-bottom: 5px; }
+
+        /* TAGS DE PROJETOS */
+        .project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+        .pj-name {
+            background: #f0f7f2; color: #2d3436; padding: 3px 8px;
+            border-radius: 4px; font-size: 11px; border: 1px solid #e1e8e4;
+        }
+        .award { background: #fff9db; border-color: #ffe066; font-weight: bold; }
+
+        /* DISPONIBILIDADE */
+        .status-box {
+            grid-column: span 2; padding: 10px; border-radius: 8px;
+            text-align: center; font-size: 12px; font-weight: bold; margin-top: 10px;
+        }
+        .online { background: #e8f5e9; color: #2e7d32; }
+        .offline { background: #ffebee; color: #c62828; }
+
+    </style>
+</head>
+<body>
+
+   <nav class="top-navbar">
+    <a href="{% url 'core:home' %}" class="btn-voltar">← Voltar</a>
+    <h1>equipes <strong>maker</strong></h1>
+    <div style="width: 85px;"></div>
+   </nav>
+
+    <div class="container">
+        <div class="members-grid">
+            
+            <div class="profile-card" onclick="toggleCard(this)">
+                <div class="avatar">ED</div>
+                <div class="info">
+                    <h3>Ednaldo Oliveira</h3>
+                    <p style="color: var(--cor-primaria); font-size: 12px; font-weight: bold;">Professor</p>
+                    
+                    <div class="details-grid">
+                        <div>
+                            <span class="label">Leciona no curso</span>
+                            <span class="value">Engenharia Mecatrônica</span>
+                        </div>
+                        <div>
+                            <span class="label">E-mail</span>
+                            <span class="value">ednaldo@maker.com</span>
+                        </div>
+                        <div style="grid-column: span 2;">
+                            <span class="label">Projetos Feitos</span>
+                            <div class="project-tags">
+                                <span class="pj-name">Braço Robótico</span>
+                                <span class="pj-name award">🏆 Drone Rescue</span>
+                                <span class="pj-name">Painel Solar IoT</span>
+                            </div>
+                        </div>
+                        <div class="status-box online">✅ Disponível para tirar dúvidas</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-card" onclick="toggleCard(this)">
+                <div class="avatar" style="background: var(--cor-dark);">AM</div>
+                <div class="info">
+                    <h3>Ana Maria Selles</h3>
+                    <p style="color: var(--cor-dark); font-size: 12px; font-weight: bold;">Aluno</p>
+                    
+                    <div class="details-grid">
+                        <div>
+                            <span class="label">Estuda no curso</span>
+                            <span class="value">ADS - 4º Semestre</span>
+                        </div>
+                        <div>
+                            <span class="label">E-mail Acadêmico</span>
+                            <span class="value">ana.s@aluno.com</span>
+                        </div>
+                        <div style="grid-column: span 2;">
+                            <span class="label">Projetos Feitos</span>
+                            <div class="project-tags">
+                                <span class="pj-name">App Manager</span>
+                                <span class="pj-name">Chatbot AI</span>
+                            </div>
+                        </div>
+                        <div class="status-box offline">❌ Ocupada no momento</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleCard(card) {
+            const isActive = card.classList.contains('active');
+            document.querySelectorAll('.profile-card').forEach(c => c.classList.remove('active'));
+            if(!isActive) card.classList.add('active');
+        }
+    </script>
+</body>
+</html>

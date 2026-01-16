@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Maker</title>
+   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <svg class="robot-icon" viewBox="0 0 100 " xmlns="http://www.w3.org/2000/svg">
+                <rect x="30" y="20" width="40" height="35" rx="8" fill="#5fb879"/>
+                <rect x="25" y="30" width="8" height="20" rx="4" fill="#5fb879"/>
+                <rect x="67" y="30" width="8" height="20" rx="4" fill="#5fb879"/>
+                <circle cx="40" cy="35" r="4" fill="white"/>
+                <circle cx="60" cy="35" r="4" fill="white"/>
+                <rect x="42" y="45" width="16" height="6" rx="2" fill="white"/>
+            </svg>
+            <div class="welcome-text">
+                bem-vindo ao<br>
+                <strong>managermakar</strong>
+            </div>
+        </div>
+
+       <div class="menu-grid">
+    <a href="{% url 'core:projetos' %}" class="menu-button projetos">
+        <div class="button-icon">🤖</div>
+        <div class="button-text">projetos</div>
+    </a>
+
+    <a href="{% url 'core:reserva' %}" class="menu-button eventos">
+        <div class="button-icon">📅</div>
+        <div class="button-text">eventos</div>
+    </a>
+
+    <a href="{% url 'core:midia' %}" class="menu-button reserva">
+        <div class="button-icon">📄</div>
+        <div class="button-text">Mídia</div>
+    </a>
+
+   <a href="{% url 'core:equipes' %}" class="menu-button equipamentos"> 
+        <div class="button-icon">🦾</div>
+        <div class="button-text">Equipes</div>
+    </a>
+        </div>
+
+        <div class="footer">
+            <div class="status-dots">
+                <div class="dot red"></div>
+                <div class="dot green"></div>
+                {% for i in "1234567" %}
+                    <div class="dot green"></div>
+                {% endfor %}
+            </div>
+            <div class="footer-text">campos Paulistana, 2025</div>
+        </div>
+    </div>
+</body>
+</html>
