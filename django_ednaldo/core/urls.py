@@ -1,14 +1,17 @@
-# core/urls.py
-
 from django.urls import path
 from . import views
 
+app_name = 'core'
+
 urlpatterns = [
-    # /
-    path('', views.homepage, name='homepage'), 
-    # /eventos/
-    path('eventos/', views.lista_eventos, name='lista_eventos'),
-    # /eventos/1/
-    path('eventos/<int:pk>/', views.detalhe_evento, name='detalhe_evento'),
-    # Adicione rotas para Projetos, Equipes e Mídia conforme avança
+    # Página Inicial
+    path('', views.home, name='home'),
+    
+    # Novas Páginas
+    path('projetos/', views.projetos, name='projetos'),
+    path('midia/', views.midia, name='midia'),
+    path('reserva/', views.reserva, name='reserva'),
+    path('equipes/', views.equipes, name='equipes'),
+    path('salvar_firebase/', views.salvar_firebase, name='salvar_firebase'), 
+    path('gerenciar_projeto/<str:doc_id>/', views.gerenciar_projeto, name='gerenciar_projeto'), # <-- Linha nova adicionada
 ]

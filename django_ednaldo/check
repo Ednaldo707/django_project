@@ -1,0 +1,152 @@
+"""
+Script para verificar se tudo está instalado e configurado corretamente
+Execute: python check_installation.py
+"""
+
+import os
+import sys
+
+def check_python_version():
+    """Verifica versão do Python"""
+    version = sys.version_info
+    print(f"🐍 Python: {version.major}.{version.minor}.{version.micro}")
+    if version.major >= 3 and version.minor >= 8:
+        print("   ✅ Versão OK")
+        return True
+    else:
+        print("   ❌ Necessário Python 3.8+")
+        return False
+
+def check_django():
+    """Verifica se Django está instalado"""
+    try:
+        import django
+        print(f"🎯 Django: {django.get_version()}")
+        print("   ✅ Django instalado")
+        return True
+    except ImportError:
+        print("❌ Django não instalado")
+        print("   Instale: pip install Django==5.0")
+        return False
+
+def check_firebase():
+    """Verifica se Firebase Admin está instalado"""
+    try:
+        import firebase_admin
+        print(f"🔥 Firebase Admin: instalado")
+        print("   ✅ Firebase Admin instalado")
+        return True
+    except ImportError:
+        print("❌ Firebase Admin não instalado")
+        print("   Instale: pip install firebase-admin==6.4.0")
+        return False
+
+def check_credentials():
+    """Verifica se o arquivo de credenciais existe"""
+    cred_path = 'firebase_credentials.json'
+    if os.path.exists(cred_path):
+        print(f"🔑 Credenciais Firebase: encontrado")
+        print("   ✅ firebase_credentials.json OK")
+        return True
+    else:
+        print("⚠️  firebase_credentials.json NÃO ENCONTRADO")
+        print("   Baixe do Firebase Console:")
+        print("   1. Firebase Console → Seu Projeto")
+        print("   2. ⚙️  Configurações → Contas de serviço")
+        print("   3. 'Gerar nova chave privada'")
+        print("   4. Salvar como 'firebase_credentials.json' na raiz")
+        return False
+
+def check_structure():
+    """Verifica estrutura de pastas"""
+    required_dirs = [
+        'core',
+        'core/templates',
+        'core/templates/core',
+        'static',
+        'static/css',
+        'setup'
+    ]
+    
+    all_ok = True
+    print("\n📁 Estrutura de pastas:")
+    for dir_path in required_dirs:
+        if os.path.exists(dir_path):
+            print(f"   ✅ {dir_path}")
+        else:
+            print(f"   ❌ {dir_path} - FALTANDO")
+            all_ok = False
+    
+    return all_ok
+
+def check_templates():
+    """Verifica se os templates existem"""
+    templates = [
+        'core/templates/core/index.html',
+        'core/templates/core/eventos.html',
+        'core/templates/core/midia.html',
+        'core/templates/core/equipes.html',
+    ]
+    
+    all_ok = True
+    print("\n📄 Templates:")
+    for template in templates:
+        if os.path.exists(template):
+            print(f"   ✅ {template}")
+        else:
+            print(f"   ❌ {template} - FALTANDO")
+            all_ok = False
+    
+    return all_ok
+
+def check_static():
+    """Verifica arquivos estáticos"""
+    if os.path.exists('static/css/style.css'):
+        print("\n🎨 CSS:")
+        print("   ✅ static/css/style.css")
+        return True
+    else:
+        print("\n🎨 CSS:")
+        print("   ❌ static/css/style.css - FALTANDO")
+        return False
+
+def main():
+    print("=" * 60)
+    print("🔍 VERIFICANDO INSTALAÇÃO - MANAGER MAKER")
+    print("=" * 60)
+    print()
+    
+    checks = [
+        ("Python", check_python_version()),
+        ("Django", check_django()),
+        ("Firebase", check_firebase()),
+        ("Credenciais", check_credentials()),
+        ("Estrutura", check_structure()),
+        ("Templates", check_templates()),
+        ("CSS", check_static()),
+    ]
+    
+    print("\n" + "=" * 60)
+    print("📊 RESUMO:")
+    print("=" * 60)
+    
+    total = len(checks)
+    passed = sum(1 for _, result in checks if result)
+    
+    for name, result in checks:
+        status = "✅" if result else "❌"
+        print(f"{status} {name}")
+    
+    print()
+    print(f"Resultado: {passed}/{total} verificações passaram")
+    
+    if passed == total:
+        print("\n🎉 TUDO OK! Você pode rodar o projeto:")
+        print("   python manage.py runserver")
+    else:
+        print("\n⚠️  Corrija os itens marcados com ❌")
+    
+    print("=" * 60)
+
+if __name__ == '__main__':
+    main()
